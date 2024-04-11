@@ -2,8 +2,9 @@
 
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:health_form/screens/email_auth/login_screen.dart';
-import 'package:health_form/screens/phone_auth/signing.dart';
+import 'package:health_form/homescreen.dart';
+//import 'package:health_form/screens/email_auth/login_screen.dart';
+//import 'package:health_form/screens/phone_auth/signing.dart';
 
 import 'firebase_options.dart';
 
@@ -24,7 +25,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       debugShowCheckedModeBanner: false,
-      home: SigningPhone(),
+      home: HealthFormPage(),
     );
   }
 }
