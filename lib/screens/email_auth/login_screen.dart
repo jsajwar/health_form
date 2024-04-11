@@ -6,17 +6,17 @@ import 'package:firebase_auth/firebase_auth.dart';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:health_form/main.dart';
 import 'package:health_form/screens/email_auth/signup_screen.dart';
 
 class LoginScreen extends StatefulWidget {
-  const LoginScreen({ super.key });
+  const LoginScreen({super.key});
 
   @override
   State<LoginScreen> createState() => _LoginScreenState();
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
 
@@ -24,22 +24,17 @@ class _LoginScreenState extends State<LoginScreen> {
     String email = emailController.text.trim();
     String password = passwordController.text.trim();
 
-    if(email == "" || password == "") {
+    if (email == "" || password == "") {
       log("Please fill all the fields!");
-    }
-    else {
-
+    } else {
       try {
-        UserCredential userCredential = await FirebaseAuth.instance.signInWithEmailAndPassword(email: email, password: password);
-        if(userCredential.user != null) {
-
-          
-          Navigator.pushReplacement(context, CupertinoPageRoute(
-            builder: (context) => 
-          ));
-          
+        UserCredential userCredential = await FirebaseAuth.instance
+            .signInWithEmailAndPassword(email: email, password: password);
+        if (userCredential.user != null) {
+          Navigator.pushReplacement(
+              context, CupertinoPageRoute(builder: (context) => MyApp()));
         }
-      } on FirebaseAuthException catch(ex) {
+      } on FirebaseAuthException catch (ex) {
         log(ex.code.toString());
       }
     }
@@ -55,30 +50,24 @@ class _LoginScreenState extends State<LoginScreen> {
       body: SafeArea(
         child: ListView(
           children: [
-
             Padding(
               padding: EdgeInsets.all(15),
               child: Column(
                 children: [
-                  
                   TextField(
                     controller: emailController,
-                    decoration: InputDecoration(
-                      labelText: "Email Address"
-                    ),
+                    decoration: InputDecoration(labelText: "Email Address"),
                   ),
-
-                  SizedBox(height: 10,),
-
+                  SizedBox(
+                    height: 10,
+                  ),
                   TextField(
                     controller: passwordController,
-                    decoration: InputDecoration(
-                      labelText: "Password"
-                    ),
+                    decoration: InputDecoration(labelText: "Password"),
                   ),
-
-                  SizedBox(height: 20,),
-
+                  SizedBox(
+                    height: 20,
+                  ),
                   CupertinoButton(
                     onPressed: () {
                       login();
@@ -86,22 +75,21 @@ class _LoginScreenState extends State<LoginScreen> {
                     color: Colors.blue,
                     child: Text("Log In"),
                   ),
-
-                  SizedBox(height: 10,),
-
+                  SizedBox(
+                    height: 10,
+                  ),
                   CupertinoButton(
                     onPressed: () {
-                      Navigator.push(context, CupertinoPageRoute(
-                        builder: (context) => SignUpScreen()
-                      ));
+                      Navigator.push(
+                          context,
+                          CupertinoPageRoute(
+                              builder: (context) => SignUpScreen()));
                     },
                     child: Text("Create an Account"),
                   ),
-
                 ],
               ),
             ),
-
           ],
         ),
       ),
